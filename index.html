@@ -48,7 +48,7 @@
         #result {
             margin-top: 20px;
             font-weight: bold;
-            text-align: center;
+            text-align: left;
         }
 
         @media (max-width: 600px) {
@@ -76,14 +76,39 @@
     <div id="result"></div>
 
     <script>
+        const addresses = [
+            "山东省菏泽市巨野县核桃园镇核桃园村",
+            "山东省菏泽市巨野县核桃园镇付庙村",
+            "山东省菏泽市巨野县营里镇田庙村"
+        ];
+
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function getRandomAddress() {
+            return addresses[Math.floor(Math.random() * addresses.length)];
+        }
+
         document.getElementById('infoForm').addEventListener('submit', function(event) {
             event.preventDefault(); // 阻止表单默认提交行为
 
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
 
+            const address = getRandomAddress();
+            const detailedAddress = address.substring(address.indexOf('镇') + 1);
+            const houseNumber = getRandomNumber(1, 1000);
+
+            const result = `
+                收件人：D ${name}<br>
+                手机号：${phone}<br>
+                所在地区：${address}<br>
+                详细地址：${detailedAddress} ${houseNumber}号
+            `;
+
             const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = `姓名: ${name}, 手机号: ${phone}`;
+            resultDiv.innerHTML = result;
         });
     </script>
 </body>
