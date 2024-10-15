@@ -1,34 +1,87 @@
-
 <!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>姓名和手机号输入</title>
-    <style>        #result {
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
             margin-top: 20px;
             font-weight: bold;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            input[type="text"], button {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
     <form id="infoForm">
         <label for="name">姓名:</label>
-        <input type="text" id="name" name="name" required><br><br>
-        
+        <input type="text" id="name" name="name" required>
+
         <label for="phone">手机号:</label>
-        <input type="text" id="phone" name="phone" required><br><br>
-        
+        <input type="text" id="phone" name="phone" required>
+
         <button type="submit">提交</button>
     </form>
-    
+
     <div id="result"></div>
 
-    <script>        document.getElementById('infoForm').addEventListener('submit', function(event) {
+    <script>
+        document.getElementById('infoForm').addEventListener('submit', function(event) {
             event.preventDefault(); // 阻止表单默认提交行为
-            
+
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
-            
+
             const resultDiv = document.getElementById('result');
             resultDiv.innerHTML = `姓名: ${name}, 手机号: ${phone}`;
         });
