@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025新年祝福</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://via.placeholder.com/1920x1080'); /* 替换为新年背景图 */
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #d32f2f;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .fireworks {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .button {
+            background-color: #d32f2f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="fireworks">🎉🎆✨</div>
+        <h1>2025新年快乐！</h1>
+        <p>
+            亲爱的朋友，<br>
+            在这辞旧迎新的时刻，愿您和您的家人幸福安康，心想事成！<br>
+            愿新的一年带来无尽的喜悦、成功与美好时光。<br>
+            感谢您一直以来的支持与陪伴，期待我们在2025年共同创造更多精彩！
+        </p>
+        <button class="button" onclick="showMessage()">点击接收祝福</button>
+    </div>
+
+    <script>
+        function showMessage() {
+            alert('🎉 祝您2025年万事如意，心想事成！ 🎉');
+        }
+    </script>
+</body>
+</html>
