@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025新年祝福</title>
+    <title>二零二五新年祝福</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #000;
             color: #333;
             text-align: center;
             margin: 0;
@@ -16,9 +16,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('https://via.placeholder.com/1920x1080'); /* 替换为新年背景图 */
-            background-size: cover;
-            background-position: center;
+            overflow: hidden;
+            position: relative;
         }
         .container {
             background-color: rgba(255, 255, 255, 0.9);
@@ -26,25 +25,23 @@
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             max-width: 600px;
+            position: relative;
+            z-index: 1;
         }
         h1 {
             font-size: 2.5rem;
             color: #d32f2f;
-            margin-bottom: 10px; /* 调整间距 */
+            margin-bottom: 10px;
         }
         h2 {
             font-size: 2.5rem;
             color: #d32f2f;
-            margin-top: 0; /* 调整间距 */
+            margin-top: 0;
         }
         p {
             font-size: 1.2rem;
             line-height: 1.6;
             margin-bottom: 30px;
-        }
-        .fireworks {
-            font-size: 2rem;
-            margin-bottom: 20px;
         }
         .button {
             background-color: #d32f2f;
@@ -59,25 +56,127 @@
         .button:hover {
             background-color: #b71c1c;
         }
+
+        /* Canvas 烟花效果 */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
     </style>
 </head>
 <body>
+    <!-- Canvas 烟花效果 -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <!-- 主要内容 -->
     <div class="container">
-        <div class="fireworks">🎉🎆✨</div>
         <h1>二零二五</h1>
         <h2>新年快乐！</h2>
         <p>
             亲爱的朋友，<br>
             在这辞旧迎新的时刻，愿您和您的家人幸福安康，心想事成！<br>
             愿新的一年带来无尽的喜悦、成功与美好时光。<br>
-            感谢您一直以来的支持与陪伴，期待我们在2025年共同创造更多精彩！
+            感谢您一直以来的支持与陪伴，期待我们在二零二五年共同创造更多精彩！
         </p>
         <button class="button" onclick="showMessage()">点击接收祝福</button>
     </div>
 
     <script>
+        // 烟花效果脚本
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor(x, y, color, velocity, size) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.velocity = velocity;
+                this.size = size;
+                this.alpha = 1;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            update() {
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.alpha -= 0.01;
+                this.size -= 0.01;
+            }
+        }
+
+        class Firework {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.particles = [];
+                this.createParticles();
+            }
+
+            createParticles() {
+                for (let i = 0; i < 100; i++) {
+                    const angle = (Math.PI * 2) / 100 * i;
+                    const velocity = {
+                        x: Math.cos(angle) * (Math.random() * 3 + 1),
+                        y: Math.sin(angle) * (Math.random() * 3 + 1)
+                    };
+                    this.particles.push(new Particle(this.x, this.y, this.color, velocity, Math.random() * 3 + 1));
+                }
+            }
+
+            draw() {
+                this.particles.forEach(particle => {
+                    particle.draw();
+                    particle.update();
+                });
+            }
+        }
+
+        const fireworks = [];
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            fireworks.forEach((firework, index) => {
+                firework.draw();
+                if (firework.particles[0].alpha <= 0) {
+                    fireworks.splice(index, 1);
+                }
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        function createFirework() {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
+            fireworks.push(new Firework(x, y, color));
+        }
+
+        setInterval(createFirework, 500);
+        animate();
+
+        // 弹窗祝福
         function showMessage() {
-            alert('🎉 祝您2025年万事如意，心想事成！ 🎉');
+            alert('🎉 祝您二零二五年万事如意，心想事成！ 🎉');
         }
     </script>
 </body>
